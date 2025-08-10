@@ -1,17 +1,67 @@
+// Import Sass modules to fix deprecation warnings
+@use 'sass:map';
+
 // Responsive breakpoints
 $breakpoints: (
   'sm': 640px,
   'md': 768px,
   'lg': 1024px,
   'xl': 1280px
-);
+) !default;
 
 @mixin respond-to($breakpoint) {
-  @if map-has-key($breakpoints, $breakpoint) {
-    @media (min-width: map-get($breakpoints, $breakpoint)) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (min-width: map.get($breakpoints, $breakpoint)) {
       @content;
     }
+  } @else {
+    @warn "Invalid breakpoint: #{$breakpoint}. Available breakpoints: #{map.keys($breakpoints)}";
   }
 }
 
-// Usage: @include respond-to('md') { ... }
+// Enhanced version with direction support
+@mixin respond-to-advanced($breakpoint, $direction: 'up') {
+  @if map.has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map.get($breakpoints, $breakpoint);
+
+    @if $direction == 'up' {
+      @media (min-width: $breakpoint-value) {
+        @content;
+      }
+    } @else if $direction == 'down' {
+      @media (max-width: ($breakpoint-value - 1px)) {
+        @content;
+      }
+    }
+  } @else {
+    @warn "Invalid breakpoint: #{$breakpoint}. Available breakpoints: #{map.keys($breakpoints)}";
+  }
+}
+
+// Convenient shorthand mixins
+@mixin mobile-up {
+  @include respond-to('sm') { @content; }
+}
+
+@mixin tablet-up {
+  @include respond-to('md') { @content; }
+}
+
+@mixin desktop-up {
+  @include respond-to('lg') { @content; }
+}
+
+@mixin large-desktop-up {
+  @include respond-to('xl') { @content; }
+}
+
+// Mobile-only (below sm breakpoint)
+@mixin mobile-only {
+  @media (max-width: 639px) { @content; }
+}
+
+// Usage examples:
+// @include respond-to('md') { ... }
+// @include respond-to-advanced('lg', 'down') { ... }
+// @include tablet-up { ... }
+// @include mobile-only { ... }
