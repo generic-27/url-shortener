@@ -1,0 +1,109 @@
+<!-- src/app/shared/components/header/header.component.html -->
+<header class="header">
+  <div class="container">
+    <div class="header__content">
+      <!-- Logo/Brand -->
+      <a
+        routerLink="/"
+        class="header__logo"
+        [attr.aria-label]="title() + ' - Go to homepage'"
+      >
+        {{ title() }}
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav
+        class="header__nav"
+        [class.header__nav--hidden]="!showNavigation()"
+        aria-label="Main navigation"
+      >
+        @for (item of navigationItems; track item.route) {
+          <a
+            [routerLink]="item.route"
+            routerLinkActive="header__nav-item--active"
+            class="header__nav-item"
+            [attr.aria-label]="item.label"
+            (click)="onNavItemClick()"
+          >
+            <span class="header__nav-icon" [attr.data-icon]="item.icon"></span>
+            {{ item.label }}
+          </a>
+        }
+      </nav>
+
+      <!-- User Actions -->
+      <div class="header__actions">
+        <!-- Login/Logout Button -->
+        @if (!isLoggedIn()) {
+          <button
+            (click)="handleLogin()"
+            class="btn btn--secondary btn--sm"
+            type="button"
+            aria-label="Login to your account"
+          >
+            Login
+          </button>
+        } @else {
+          <div class="header__user">
+            <!-- User Avatar -->
+            <div class="header__avatar" [attr.aria-label]="'User avatar for ' + username()">
+              {{ userInitials() }}
+            </div>
+
+            <!-- Username (conditionally displayed) -->
+            @if (username()) {
+              <span class="header__username">
+                Welcome, {{ username() }}
+              </span>
+            }
+
+            <!-- Logout Button -->
+            <button
+              (click)="handleLogout()"
+              class="btn btn--secondary btn--sm"
+              type="button"
+              aria-label="Logout from your account"
+            >
+              Logout
+            </button>
+          </div>
+        }
+
+        <!-- Mobile Menu Toggle -->
+        <button
+          class="header__mobile-toggle"
+          [class.header__mobile-toggle--active]="isMobileMenuOpen()"
+          (click)="toggleMobileMenu()"
+          type="button"
+          [attr.aria-expanded]="isMobileMenuOpen()"
+          aria-label="Toggle mobile menu"
+        >
+          <span class="header__hamburger"></span>
+          <span class="header__hamburger"></span>
+          <span class="header__hamburger"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Menu -->
+    <nav
+      class="header__mobile-nav"
+      [class.header__mobile-nav--open]="isMobileMenuOpen()"
+      [attr.aria-hidden]="!isMobileMenuOpen()"
+      aria-label="Mobile navigation"
+    >
+      @for (item of navigationItems; track item.route) {
+        <a
+          [routerLink]="item.route"
+          routerLinkActive="header__mobile-nav-item--active"
+          class="header__mobile-nav-item"
+          [attr.aria-label]="item.label"
+          (click)="onNavItemClick()"
+        >
+          <span class="header__nav-icon" [attr.data-icon]="item.icon"></span>
+          {{ item.label }}
+        </a>
+      }
+    </nav>
+  </div>
+</header>

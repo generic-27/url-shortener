@@ -25,6 +25,12 @@
       "@core/*": ["app/core/*"],
       "@shared/*": ["app/shared/*"],
       "@features/*": ["app/features/*"],
+      "@data/*": ["app/data/*"],
+      "@styles/*": ["styles/*"],
+      "@abstracts/*": ["styles/abstracts/*"],
+      "@mixins": ["styles/abstracts/_mixins.scss"],
+      "@variables": ["styles/abstracts/_variables.scss"],
+      "@functions": ["styles/abstracts/_functions.scss"]
     }
   },
   "angularCompilerOptions": {

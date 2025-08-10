@@ -1,0 +1,299 @@
+// src/app/shared/components/header/header.component.scss
+@use '@mixins' as *;
+
+// =============================================================================
+// HEADER COMPONENT STYLES
+// =============================================================================
+
+:host {
+  display: block;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--gray-200, #e5e7eb);
+  transition: all 0.3s ease;
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    gap: var(--space-lg);
+  }
+
+  &__logo {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-500);
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--primary-600, #2563eb);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--primary-500);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+  }
+
+  // =============================================================================
+  // DESKTOP NAVIGATION
+  // =============================================================================
+
+  &__nav {
+    display: none;
+    gap: var(--space-lg);
+
+    @include respond-to('md') {
+      display: flex;
+      gap: var(--space-xl);
+    }
+
+    &--hidden {
+      display: none !important;
+    }
+  }
+
+  &__nav-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--gray-700, #374151);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium, 500);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    position: relative;
+
+    &:hover {
+      color: var(--primary-500);
+      background-color: var(--primary-50, #eff6ff);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--primary-500);
+      outline-offset: 2px;
+    }
+
+    &--active {
+      color: var(--primary-600, #2563eb);
+      background-color: var(--primary-100, #dbeafe);
+      font-weight: var(--font-weight-bold);
+    }
+  }
+
+  &__nav-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+
+    // Simple icon styles using CSS
+    &[data-icon="home"]::before { content: "🏠"; }
+    &[data-icon="link"]::before { content: "🔗"; }
+    &[data-icon="chart"]::before { content: "📊"; }
+    &[data-icon="history"]::before { content: "📝"; }
+  }
+
+  // =============================================================================
+  // USER ACTIONS SECTION
+  // =============================================================================
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  &__username {
+    font-size: var(--font-size-sm);
+    color: var(--gray-600, #4b5563);
+    font-weight: var(--font-weight-medium);
+
+    @include respond-to('sm') {
+      display: inline;
+    }
+
+    // Hide username on very small screens
+    display: none;
+  }
+
+  // =============================================================================
+  // MOBILE MENU TOGGLE
+  // =============================================================================
+
+  &__mobile-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 101;
+
+    @include respond-to('md') {
+      display: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--primary-500);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+  }
+
+  &__hamburger {
+    width: 100%;
+    height: 2px;
+    background-color: var(--gray-700, #374151);
+    border-radius: 1px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+
+  &__mobile-toggle--active {
+    .header__hamburger {
+      &:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      &:nth-child(2) {
+        opacity: 0;
+      }
+
+      &:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+    }
+  }
+
+  // =============================================================================
+  // MOBILE NAVIGATION
+  // =============================================================================
+
+  &__mobile-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-bottom: 1px solid var(--gray-200, #e5e7eb);
+    border-top: 1px solid var(--gray-200, #e5e7eb);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 99;
+
+    @include respond-to('md') {
+      display: none;
+    }
+
+    &--open {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &__mobile-nav-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-lg);
+    color: var(--gray-700, #374151);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    border-bottom: 1px solid var(--gray-100, #f3f4f6);
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: var(--primary-50, #eff6ff);
+      color: var(--primary-600, #2563eb);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--primary-500);
+      outline-offset: -2px;
+    }
+
+    &--active {
+      background-color: var(--primary-100, #dbeafe);
+      color: var(--primary-600, #2563eb);
+      font-weight: var(--font-weight-bold);
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+// =============================================================================
+// BUTTON SIZE MODIFIER (if not already in your button system)
+// =============================================================================
+
+.btn--sm {
+  padding: var(--space-xs) var(--space-md);
+  font-size: var(--font-size-sm);
+}
+
+// =============================================================================
+// DARK THEME SUPPORT
+// =============================================================================
+
+[data-theme="dark"] {
+  .header {
+    background: rgba(17, 24, 39, 0.95);
+    border-bottom-color: var(--gray-800, #1f2937);
+
+    &__logo {
+      color: var(--primary-400, #60a5fa);
+    }
+
+    &__nav-item,
+    &__mobile-nav-item {
+      color: var(--gray-300, #d1d5db);
+
+      &:hover {
+        color: var(--primary-400, #60a5fa);
+        background-color: var(--gray-800, #1f2937);
+      }
+
+      &--active {
+        color: var(--primary-400, #60a5fa);
+        background-color: var(--gray-700, #374151);
+      }
+    }
+
+    &__username {
+      color: var(--gray-400, #9ca3af);
+    }
+
+    &__hamburger {
+      background-color: var(--gray-300, #d1d5db);
+    }
+
+    &__mobile-nav {
+      background: var(--gray-900, #111827);
+      border-color: var(--gray-700, #374151);
+    }
+  }
+}
