@@ -1,6 +1,12 @@
+// =============================================================================
+// UTILITY CLASS SYSTEM - FOUNDATION
+// =============================================================================
+
+// Base spacing unit (customize this to match your design system)
 $base-spacing: 1rem; // 16px
+$max-spacing-multiplier: 10; // Creates classes up to .m-10, .p-10, etc.
 
-
+// Spacing scale (you can customize these values)
 $spacing-scale: (
   0: 0,
   1: $base-spacing * 0.25,    // 4px
@@ -180,4 +186,3 @@ $text-sizes: (
 .flex-wrap { flex-wrap: wrap !important; }
 .flex-nowrap { flex-wrap: nowrap !important; }
 .flex-wrap-reverse { flex-wrap: wrap-reverse !important; }
-

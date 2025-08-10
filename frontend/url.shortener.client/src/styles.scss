@@ -1,2 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
-@import "styles/utilities/_utilities.scss";
+// 1. Abstracts (no output)
+@use 'styles/abstracts/variables' as *;
+@use 'styles/abstracts/mixins' as *;
+
+// 2. Base styles
+@use 'styles/base/reset' as *;
+@use 'styles/base/typography' as *;
+
+// 3. Components
+@use 'styles/components/buttons' as *;
+
+// 4. Layout
+@use 'styles/layout/container' as *;
+@use 'styles/layout/header' as *;
+
+// 5. Utilities (should come last)
+@use 'styles/utilities/utilities' as *;
