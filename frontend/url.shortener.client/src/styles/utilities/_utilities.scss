@@ -1,0 +1,183 @@
+$base-spacing: 1rem; // 16px
+
+
+$spacing-scale: (
+  0: 0,
+  1: $base-spacing * 0.25,    // 4px
+  2: $base-spacing * 0.5,     // 8px
+  3: $base-spacing * 0.75,    // 12px
+  4: $base-spacing,           // 16px
+  5: $base-spacing * 1.25,    // 20px
+  6: $base-spacing * 1.5,     // 24px
+  8: $base-spacing * 2,       // 32px
+  10: $base-spacing * 2.5,    // 40px
+  12: $base-spacing * 3,      // 48px
+  16: $base-spacing * 4,      // 64px
+  20: $base-spacing * 5,      // 80px
+  24: $base-spacing * 6,      // 96px
+  auto: auto
+);
+
+// =============================================================================
+// MARGIN UTILITIES
+// =============================================================================
+
+// Generate margin classes
+@each $key, $value in $spacing-scale {
+  // All sides
+  .m-#{$key} { margin: $value !important; }
+
+  // Horizontal (left + right)
+  .mx-#{$key} {
+    margin-left: $value !important;
+    margin-right: $value !important;
+  }
+
+  // Vertical (top + bottom)
+  .my-#{$key} {
+    margin-top: $value !important;
+    margin-bottom: $value !important;
+  }
+
+  // Individual sides
+  .mt-#{$key} { margin-top: $value !important; }
+  .mr-#{$key} { margin-right: $value !important; }
+  .mb-#{$key} { margin-bottom: $value !important; }
+  .ml-#{$key} { margin-left: $value !important; }
+}
+
+// =============================================================================
+// PADDING UTILITIES
+// =============================================================================
+
+// Generate padding classes
+@each $key, $value in $spacing-scale {
+  // All sides
+  .p-#{$key} { padding: $value !important; }
+
+  // Horizontal (left + right)
+  .px-#{$key} {
+    padding-left: $value !important;
+    padding-right: $value !important;
+  }
+
+  // Vertical (top + bottom)
+  .py-#{$key} {
+    padding-top: $value !important;
+    padding-bottom: $value !important;
+  }
+
+  // Individual sides
+  .pt-#{$key} { padding-top: $value !important; }
+  .pr-#{$key} { padding-right: $value !important; }
+  .pb-#{$key} { padding-bottom: $value !important; }
+  .pl-#{$key} { padding-left: $value !important; }
+}
+
+// =============================================================================
+// TEXT UTILITIES
+// =============================================================================
+
+// Text alignment
+.text-left { text-align: left !important; }
+.text-center { text-align: center !important; }
+.text-right { text-align: right !important; }
+.text-justify { text-align: justify !important; }
+
+// Text sizes (customize these to match your design system)
+$text-sizes: (
+  xs: 0.75rem,    // 12px
+  sm: 0.875rem,   // 14px
+  base: 1rem,     // 16px
+  lg: 1.125rem,   // 18px
+  xl: 1.25rem,    // 20px
+  2xl: 1.5rem,    // 24px
+  3xl: 1.875rem,  // 30px
+  4xl: 2.25rem,   // 36px
+  5xl: 3rem,      // 48px
+);
+
+@each $key, $value in $text-sizes {
+  .text-#{$key} { font-size: $value !important; }
+}
+
+// Font weights
+.font-thin { font-weight: 100 !important; }
+.font-light { font-weight: 300 !important; }
+.font-normal { font-weight: 400 !important; }
+.font-medium { font-weight: 500 !important; }
+.font-semibold { font-weight: 600 !important; }
+.font-bold { font-weight: 700 !important; }
+.font-extrabold { font-weight: 800 !important; }
+.font-black { font-weight: 900 !important; }
+
+// Text transform
+.uppercase { text-transform: uppercase !important; }
+.lowercase { text-transform: lowercase !important; }
+.capitalize { text-transform: capitalize !important; }
+.normal-case { text-transform: none !important; }
+
+// Text decoration
+.underline { text-decoration: underline !important; }
+.line-through { text-decoration: line-through !important; }
+.no-underline { text-decoration: none !important; }
+
+// Line height
+.leading-none { line-height: 1 !important; }
+.leading-tight { line-height: 1.25 !important; }
+.leading-snug { line-height: 1.375 !important; }
+.leading-normal { line-height: 1.5 !important; }
+.leading-relaxed { line-height: 1.625 !important; }
+.leading-loose { line-height: 2 !important; }
+
+// Text colors (you can expand this based on your color system)
+.text-primary { color: var(--primary-color, #3498db) !important; }
+.text-secondary { color: var(--secondary-color, #6c757d) !important; }
+.text-success { color: var(--success-color, #28a745) !important; }
+.text-danger { color: var(--danger-color, #dc3545) !important; }
+.text-warning { color: var(--warning-color, #ffc107) !important; }
+.text-info { color: var(--info-color, #17a2b8) !important; }
+.text-light { color: var(--light-color, #f8f9fa) !important; }
+.text-dark { color: var(--dark-color, #343a40) !important; }
+.text-muted { color: var(--muted-color, #6c757d) !important; }
+.text-white { color: #ffffff !important; }
+.text-black { color: #000000 !important; }
+
+// =============================================================================
+// DISPLAY UTILITIES (BONUS)
+// =============================================================================
+
+.d-none { display: none !important; }
+.d-inline { display: inline !important; }
+.d-inline-block { display: inline-block !important; }
+.d-block { display: block !important; }
+.d-flex { display: flex !important; }
+.d-inline-flex { display: inline-flex !important; }
+.d-grid { display: grid !important; }
+
+// =============================================================================
+// FLEX UTILITIES (BONUS)
+// =============================================================================
+
+.justify-start { justify-content: flex-start !important; }
+.justify-end { justify-content: flex-end !important; }
+.justify-center { justify-content: center !important; }
+.justify-between { justify-content: space-between !important; }
+.justify-around { justify-content: space-around !important; }
+.justify-evenly { justify-content: space-evenly !important; }
+
+.items-start { align-items: flex-start !important; }
+.items-end { align-items: flex-end !important; }
+.items-center { align-items: center !important; }
+.items-baseline { align-items: baseline !important; }
+.items-stretch { align-items: stretch !important; }
+
+.flex-row { flex-direction: row !important; }
+.flex-row-reverse { flex-direction: row-reverse !important; }
+.flex-col { flex-direction: column !important; }
+.flex-col-reverse { flex-direction: column-reverse !important; }
+
+.flex-wrap { flex-wrap: wrap !important; }
+.flex-nowrap { flex-wrap: nowrap !important; }
+.flex-wrap-reverse { flex-wrap: wrap-reverse !important; }
+
