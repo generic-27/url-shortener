@@ -2,7 +2,7 @@
 import { Component, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
-import { NavigationItem, User } from '@data/url-shortener.intefaces';
+import { NavigationItem, User } from '@data/url-shortener.interfaces';
 
 
 @Component({
