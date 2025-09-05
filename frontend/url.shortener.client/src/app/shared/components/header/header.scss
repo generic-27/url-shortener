@@ -1,0 +1,203 @@
+@use '../../../../styles/abstracts/variables' as *;
+@use '../../../../styles/abstracts/mixins' as *;
+
+.header {
+  background: var(--color-white);
+  border-bottom: 1px solid var(--gray-200);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  &__container {
+    @include container;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem; // 64px - good header height
+    gap: var(--space-lg);
+  }
+
+  &__brand {
+    flex-shrink: 0;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-decoration: none;
+    color: var(--primary-600);
+    font-weight: var(--font-weight-bold);
+    transition: color var(--transition-fast);
+
+    &:hover {
+      color: var(--primary-700);
+    }
+  }
+
+  &__logo-icon {
+    font-size: 1.5rem;
+  }
+
+  &__title {
+    font-size: var(--font-size-lg);
+
+    @include breakpoint-down('sm') {
+      display: none;
+    }
+  }
+
+  // Desktop Navigation
+  &__nav--desktop {
+    display: none;
+
+    @include breakpoint-up('md') {
+      display: block;
+    }
+  }
+
+  // Mobile Navigation
+  &__nav--mobile {
+    position: fixed;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-white);
+    border-top: 1px solid var(--gray-200);
+    padding: var(--space-lg) 0;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    @include breakpoint-up('md') {
+      display: none;
+    }
+
+    &--open {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &__nav-list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl); // Increased gap for better spacing
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    .header__nav--mobile & {
+      flex-direction: column;
+      gap: var(--space-sm);
+      padding: 0 var(--space-lg);
+    }
+  }
+
+  &__nav-item {
+    // No additional styles needed
+  }
+
+  &__nav-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
+    text-decoration: none;
+    color: var(--gray-700);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-sm);
+
+    &:hover {
+      color: var(--primary-600);
+      background-color: var(--primary-50);
+    }
+
+    &--active {
+      color: var(--primary-600);
+      background-color: var(--primary-100);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    .header__nav--mobile & {
+      width: 100%;
+      justify-content: flex-start;
+      padding: var(--space-md) var(--space-lg);
+      font-size: var(--font-size-base);
+    }
+  }
+
+  &__nav-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  &__nav-text {
+    // Let it inherit from parent
+  }
+
+  // Mobile Menu Toggle
+  &__menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: var(--space-sm);
+    color: var(--gray-600);
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    width: 2.5rem;
+    height: 2.5rem;
+
+    @include breakpoint-up('md') {
+      display: none;
+    }
+
+    &:hover {
+      color: var(--primary-600);
+      background-color: var(--gray-100);
+    }
+
+    &:focus {
+      outline: 2px solid var(--primary-500);
+      outline-offset: 2px;
+    }
+  }
+
+  &__menu-icon {
+    font-size: 1.25rem;
+    display: block;
+    line-height: 1;
+  }
+
+  // Mobile Overlay
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-fast);
+    z-index: calc(var(--z-header) - 1);
+
+    @include breakpoint-up('md') {
+      display: none;
+    }
+
+    &--visible {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}

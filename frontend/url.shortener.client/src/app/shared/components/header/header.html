@@ -1,0 +1,69 @@
+<!-- src/app/shared/components/header/header.component.html -->
+<header class="header">
+  <div class="header__container">
+    <!-- Logo and Title -->
+    <div class="header__brand">
+      <a routerLink="/" class="header__logo" (click)="closeMenu()">
+        <span class="header__logo-icon">🔗</span>
+        <span class="header__title">{{ appTitle }}</span>
+      </a>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <nav class="header__nav header__nav--desktop">
+      <ul class="header__nav-list">
+        <li class="header__nav-item" *ngFor="let item of navigationItems">
+          <a
+            [routerLink]="item.route"
+            routerLinkActive="header__nav-link--active"
+            [routerLinkActiveOptions]="{ exact: item.route === '/' }"
+            class="header__nav-link"
+          >
+            <span class="header__nav-icon">{{ getIcon(item.icon) }}</span>
+            <span class="header__nav-text">{{ item.label }}</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <button
+      class="header__menu-toggle"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="isMenuOpen"
+      aria-label="Toggle navigation menu"
+    >
+      <span class="header__menu-icon">
+        {{ isMenuOpen ? '✕' : '☰' }}
+      </span>
+    </button>
+
+    <!-- Mobile Navigation -->
+    <nav
+      class="header__nav header__nav--mobile"
+      [class.header__nav--open]="isMenuOpen"
+    >
+      <ul class="header__nav-list">
+        <li class="header__nav-item" *ngFor="let item of navigationItems">
+          <a
+            [routerLink]="item.route"
+            routerLinkActive="header__nav-link--active"
+            [routerLinkActiveOptions]="{ exact: item.route === '/' }"
+            class="header__nav-link"
+            (click)="closeMenu()"
+          >
+            <span class="header__nav-icon">{{ getIcon(item.icon) }}</span>
+            <span class="header__nav-text">{{ item.label }}</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div
+    class="header__overlay"
+    [class.header__overlay--visible]="isMenuOpen"
+    (click)="closeMenu()"
+  ></div>
+</header>
